@@ -146,32 +146,6 @@ while true; do
   esac
 done
 
-# настроим ssh
-echo -e "\n====================\nEdit sshd_config file\n===================="
-
-while true; do
-  read -r -n 1 -p "Continue or Skip? (c|s) " cs
-  case $cs in
-  [Cc]*)
-    sed -i 's/#\?\(Port\s*\).*$/\1 1870/' /etc/ssh/sshd_config
-    sed -i 's/#\?\(PermitRootLogin\s*\).*$/\1 no/' /etc/ssh/sshd_config
-    sed -i 's/#\?\(PubkeyAuthentication\s*\).*$/\1 yes/' /etc/ssh/sshd_config
-    sed -i 's/#\?\(PermitEmptyPasswords\s*\).*$/\1 no/' /etc/ssh/sshd_config
-    sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' /etc/ssh/sshd_config
-    echo -e "\n\n"
-    /etc/init.d/ssh restart
-    echo -e "\nDONE\n"
-    break
-    ;;
-
-  [Ss]*)
-    echo -e "\n"
-    break
-    ;;
-  *) echo -e "\nPlease answer C or S!\n" ;;
-  esac
-done
-
 # выключим ipv6
 echo -e "\n====================\nDisabling ipv6\n===================="
 
